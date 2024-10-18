@@ -29,4 +29,5 @@ coverage
 
 *.tsbuildinfo
 *.json
-*.node_modules
+*.md
+

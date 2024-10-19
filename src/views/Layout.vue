@@ -10,6 +10,60 @@ import {
     CaretBottom
 } from '@element-plus/icons-vue'
 import avatar from '@/assets/default.png'
+
+//顶部导航信息显示
+import { userInfoService } from '@/api/user.js';
+import {useUserInfoStore} from '@/stores/userInfo.js'
+const userInfoStore = useUserInfoStore();
+const getUserInfo = async()=>{
+    //调用接口，获得用户信息
+    let result = await userInfoService();
+    //将数据存到pina中
+    userInfoStore.setInfo(result.data);
+}
+getUserInfo();
+
+//条目被触发，调用的函数
+import { useRouter } from 'vue-router';
+import { ElMessage,ElMessageBox } from 'element-plus';
+import { useTokenStore } from '@/stores/token';
+const tokenStore = useTokenStore();
+const router = useRouter();
+const handleCommand = (command)=>{
+    //判断指令
+    if (command === 'logout') {
+        //退出登录
+        ElMessageBox.confirm(
+        '您确定要退出登录吗?',
+        '警告',
+        {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    )
+        .then(async () => {
+            //清空pina中的信息
+            tokenStore.removeToken();
+            userInfoStore.removeInfo();
+            //跳转到login界面
+            router.push('/login');
+            ElMessage({
+                type: 'success',
+                message: '退出登录成功',
+            })
+        })
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '取消退出登录',
+            })
+        })
+    } else {
+        //路由
+        router.push('/user/' + command);
+    }
+}
 </script>
 
 <template>
@@ -63,19 +117,19 @@ import avatar from '@/assets/default.png'
         <el-container>
             <!-- 头部区域 -->
             <el-header>
-                <div>程序员：<strong>husky</strong></div>
-                <el-dropdown placement="bottom-end">
+                <div>程序员：<strong>{{ userInfoStore.info.nickname }}</strong></div>
+                <el-dropdown placement="bottom-end" @command="handleCommand">
                     <span class="el-dropdown__box">
-                        <el-avatar :src="avatar" />
+                        <el-avatar :src="userInfoStore.info.userPic ? userInfoStore.info.userPic : avatar" />
                         <el-icon>
                             <CaretBottom />
                         </el-icon>
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item command="profile" :icon="User">基本资料</el-dropdown-item>
+                            <el-dropdown-item command="info" :icon="User">基本资料</el-dropdown-item>
                             <el-dropdown-item command="avatar" :icon="Crop">更换头像</el-dropdown-item>
-                            <el-dropdown-item command="password" :icon="EditPen">重置密码</el-dropdown-item>
+                            <el-dropdown-item command="resetPassword" :icon="EditPen">重置密码</el-dropdown-item>
                             <el-dropdown-item command="logout" :icon="SwitchButton">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>

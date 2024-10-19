@@ -29,3 +29,23 @@ export const deleteArticleCategoryService = (id)=>{
 export const articleListService = (params)=>{
     return request.get('/article', {params:params});
 }
+
+//文章上传
+export const uploadArticleService = (articleData)=>{
+    return request.post('/article',articleData)
+}
+
+//删除文章
+export const deleteArticleService = (id)=>{
+    return request.delete('/article?id=' + id)
+}
+
+//文章更新
+export const updateArticleService = (articleData)=>{
+    return request.put('/article', articleData)
+}
+
+//获取文章详情
+export const detailArticleService = (id)=>{
+    return request.get('/article/detail?id=' + id)
+}

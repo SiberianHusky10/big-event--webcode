@@ -19,3 +19,20 @@ export const userLoginService = (loginData)=>{
     }
     return request.post('user/login',params);
 }
+
+//获取用户详细信息
+export const userInfoService = ()=>{
+    return request.get('/user/userInfo');
+}
+
+//更新用户信息
+export const updateUserInfoService = (userInfoData)=>{
+    return request.put('/user/update', userInfoData)
+}
+
+//更新用户头像
+export const updateUserAvatarService = (avatarUrl)=>{
+    const params = new URLSearchParams();
+    params.append('avatarUrl',avatarUrl);
+    return request.patch('/user/updateAvatar',params);
+}

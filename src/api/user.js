@@ -36,3 +36,12 @@ export const updateUserAvatarService = (avatarUrl)=>{
     params.append('avatarUrl',avatarUrl);
     return request.patch('/user/updateAvatar',params);
 }
+
+//更改用户密码
+export const updateUserPasswordService = (passwordData)=>{
+    // const params = new URLSearchParams();
+    // for (let key in passwordData) {
+    //     params.append(key, passwordData[key]);
+    // }
+    return request.patch('/user/updatePwd', passwordData);
+}

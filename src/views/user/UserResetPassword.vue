@@ -59,6 +59,13 @@ const updatePwd = async () => {
     ElMessage.success('密码成功修改，请重新登录');
 }
 
+//清空文本框内容
+const clear = ()=>{
+    userInfo.value.password = '';
+    userInfo.value.newPassword = '';
+    userInfo.value.reNewPassword = '';
+}
+
 </script>
 <template>
     <el-card class="page-container">
@@ -84,6 +91,7 @@ const updatePwd = async () => {
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="updatePwd">更改密码</el-button>
+                        <el-button type="success" @click="clear">清空文本</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>

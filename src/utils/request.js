@@ -5,8 +5,7 @@ import axios from "axios";
 import { ElMessage } from 'element-plus'
 
 //定义一个变量，记录公共的前缀
-// const baseURL = 'http://localhost:8080';
-const baseURL = '/api';
+const baseURL = 'http://109.176.19.22:8080';
 const instance = axios.create({baseURL});
 
 //添加请求拦截器

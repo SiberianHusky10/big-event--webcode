@@ -13,10 +13,22 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  build: {
+    chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        }
+      }
+    }
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://109.176.19.22:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }

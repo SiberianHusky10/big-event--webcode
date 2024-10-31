@@ -27,7 +27,6 @@ coverage
 *.sln
 *.sw?
 
+
 *.tsbuildinfo
-*.json
-*.md
 

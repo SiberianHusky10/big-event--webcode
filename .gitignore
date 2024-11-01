@@ -26,7 +26,12 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-
+README.md
+yarn.lock
+jsconfig.json
+package-lock.json
+package.json
+vite.config.js
 
 *.tsbuildinfo
 

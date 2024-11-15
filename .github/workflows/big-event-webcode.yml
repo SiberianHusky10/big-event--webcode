@@ -13,9 +13,11 @@ jobs:
     - name: 读取仓库内容
       uses: actions/checkout@v4
 
-    - name: 安装依赖和项目打包
+    - name: 安装依赖
       run: npm install
-           npm run build
+    
+    - name: 项目打包
+      run: npm run build      
     
     - name: 查找路径
       run: pwd

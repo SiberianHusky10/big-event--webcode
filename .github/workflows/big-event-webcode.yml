@@ -1,29 +1,65 @@
-name: 打包big-event-webcode项目
-on: push
+# name: 打包big-event-webcode项目
+# on: push
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
+
+# jobs:
+#   npm-build:
+#     name: npm-build工作
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: 读取仓库内容
+#       uses: actions/checkout@v4
+
+#     - name: 安装依赖
+#       run: npm install
+    
+#     - name: 项目打包
+#       run: npm run build      
+    
+#     - name: 查找路径
+#       run: pwd
+
+#     - name: 部署
+#       uses: JamesIves/github-pages-deploy-action@v4
+#       with:
+#         branch: gh-pages
+#         folder: dist
+
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
-  npm-build:
-    name: npm-build工作
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 读取仓库内容
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: 安装依赖
-      run: npm install
-    
-    - name: 项目打包
-      run: npm run build      
-    
-    - name: 查找路径
-      run: pwd
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    - name: 部署
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: dist
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Log in to GitHub Packages
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag ghcr.io/${{ github.repository }}/vue-app:latest
+
+      - name: Push to GitHub Packages
+        run: docker push ghcr.io/${{ github.repository }}/vue-app:latest

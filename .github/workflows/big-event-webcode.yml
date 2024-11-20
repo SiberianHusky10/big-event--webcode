@@ -56,7 +56,7 @@ jobs:
         run: npm run build
 
       - name: Log in to GitHub Packages
-        run: echo ${{ secrets.BIG_EVENT_WEBCODE_TOKEN1 }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo ${{ secrets.big-event-webcode-token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/vue-app:latest

@@ -30,13 +30,13 @@
 
 name: Build and Push Docker Image
 
-# on:
-#   push:
-#     branches: [ "master" ]
-#   pull_request:
-#     branches: [ "master" ]
 on:
-  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+# on:
+#   workflow_dispatch:
 
 permissions:
   contents: read
@@ -45,6 +45,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -72,7 +73,9 @@ jobs:
           password: ${{ secrets.GHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build . --file Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/vue-app:latest
+        # run: docker build . --file Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/vue-app:latest
+        run: docker build . --file Dockerfile --tag ghcr.io/SiberianHusky10/big-event--webcode/vue-app:latest
 
       - name: Push to GitHub Packages
-        run: docker push ghcr.io/siberianhusky10/big-event--webcode/vue-app:latest
+        # run: docker push ghcr.io/siberianhusky10/big-event--webcode/vue-app:latest
+        run: docker push ghcr.io/SiberianHusky10/big-event--webcode/vue-app:latest

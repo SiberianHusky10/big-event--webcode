@@ -1,0 +1,81 @@
+# name: 打包big-event-webcode项目
+# on: push
+
+# permissions:
+#   contents: write
+
+# jobs:
+#   npm-build:
+#     name: npm-build工作
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: 读取仓库内容
+#       uses: actions/checkout@v4
+
+#     - name: 安装依赖
+#       run: npm install
+    
+#     - name: 项目打包
+#       run: npm run build      
+    
+#     - name: 查找路径
+#       run: pwd
+
+#     - name: 部署
+#       uses: JamesIves/github-pages-deploy-action@v4
+#       with:
+#         branch: gh-pages
+#         folder: dist
+
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+# on:
+#   workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      # - name: Log in to GitHub Packages
+      #   run: echo ${{ secrets.big-event-webcode-token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          # username: ${{ github.repository_owner }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.BIG_EVENT_WEBCODE_TOKEN4 }}
+
+      - name: Build Docker image
+        # run: docker build . --file Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
+        run: docker build . --file ./frontend/Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
+
+      - name: Push to GitHub Packages
+        # run: docker push ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
+        run: docker push ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest

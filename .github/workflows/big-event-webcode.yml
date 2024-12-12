@@ -33,4 +33,4 @@ jobs:
 
       - name: Restart Api
         run: |
-          docker compose -f /app/docker-compose.yaml up -d --force-recreate big-event-web
+          docker compose -f /app/docker-compose.yaml up -d --force-recreate web

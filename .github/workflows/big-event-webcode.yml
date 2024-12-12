@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.PACKAGE_TOKEN }}
 
       - name: Build Docker image
-        run: docker build . --file ./frontend/Dockerfile --tag ghcr.io/husky2025/big-event-web:latest
+        run: docker build . --tag ghcr.io/husky2025/big-event-web:latest
 
       - name: Push to GitHub Packages
         run: docker push ghcr.io/husky2025/big-event-web:latest

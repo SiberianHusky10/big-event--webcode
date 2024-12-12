@@ -74,8 +74,8 @@ jobs:
 
       - name: Build Docker image
         # run: docker build . --file Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
-        run: docker build . --file ./frontend/Dockerfile --tag ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
+        run: docker build . --file ./frontend/Dockerfile --tag ghcr.io/husky2025/big-event-webcode:latest
 
       - name: Push to GitHub Packages
         # run: docker push ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
-        run: docker push ghcr.io/siberianhusky10/big-event--webcode/big-event-webcode:latest
+        run: docker push ghcr.io/husky2025/big-event-webcode:latest

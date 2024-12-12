@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -30,3 +30,7 @@ jobs:
 
       - name: Push to GitHub Packages
         run: docker push ghcr.io/husky2025/big-event-web:latest
+
+      - name: Restart Api
+        run: |
+          docker compose -f /app/docker-compose.yaml up -d --force-recreate big-event-web

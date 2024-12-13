@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.BIG_EVENT_WEBCODE_TOKEN4 }}
 
       - name: Build Docker image
-        run: docker build . --file ./frontend/Dockerfile --tag ghcr.io/siberianhusky10/big-event-webapi:latest
+        run: docker build . --file ./frontend/Dockerfile --tag ghcr.io/siberianhusky10/big-event-web:latest
 
       - name: Push to GitHub Packages
-        run: docker push ghcr.io/siberianhusky10/big-event-webapi:latest
+        run: docker push ghcr.io/siberianhusky10/big-event-web:latest

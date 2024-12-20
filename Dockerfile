@@ -13,6 +13,7 @@ RUN yarn build
 FROM nginx:stable-alpine AS production-stage
 
 COPY --from=build-stage /project/big-event-webcode/dist /usr/share/nginx/html
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 

@@ -24,7 +24,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.PACKAGE_TOKEN }}
+          password: ${{ secrets.BIG_EVENT_WEBCODE_TOKEN4 }}
 
       - name: Build Docker image
         run: docker build . --tag ghcr.io/SiberianHusky10/big-event-web:latest

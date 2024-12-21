@@ -34,5 +34,6 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
-  }
+  },
+  publicPath: '/assets/'
 })

@@ -35,5 +35,5 @@ export default defineConfig({
       }
     }
   },
-  publicPath: '/assets/'
+  publicPath: '/'
 })

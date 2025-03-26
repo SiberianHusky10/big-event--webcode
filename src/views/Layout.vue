@@ -143,7 +143,7 @@ const handleCommand = (command)=>{
                 <RouterView></RouterView>
             </el-main>
             <!-- 底部区域 -->
-            <el-footer>大事件 ©2024 Created by husky  copy from 黑马程序员</el-footer>
+            <el-footer> 极刻快讯 ©2025 Created by Husky </el-footer>
         </el-container>
     </el-container>
 </template>
@@ -155,10 +155,10 @@ const handleCommand = (command)=>{
     .el-aside {
         background-color: #232323;
 
-        &__logo {
-            height: 120px;
-            background: url('@/assets/logo.png') no-repeat center / 120px auto;
-        }
+        //&__logo {
+        //    height: 120px;
+        //    background: url('@/assets/logo.png') no-repeat center / 120px auto;
+        //}
 
         .el-menu {
             border-right: none;

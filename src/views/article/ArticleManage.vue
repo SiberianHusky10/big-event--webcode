@@ -301,7 +301,7 @@ const deleteArticle = (row) => {
                         headers:设置上传的请求头
                         on-success:设置上传成功的回调函数
                       -->
-                    <el-upload class="avatar-uploader" :auto-upload="true" :show-file-list="false" action="http://109.176.19.22:8080/upload"
+                    <el-upload class="avatar-uploader" :auto-upload="true" :show-file-list="false" action="https://api.geeknews.tech/upload"
                         name="file" :headers="{ 'Authorization': tokenStore.token }" :on-success="uploadSuccess">
                         <img v-if="articleModel.coverImg" :src="articleModel.coverImg" class="avatar" />
                         <el-icon v-else class="avatar-uploader-icon">

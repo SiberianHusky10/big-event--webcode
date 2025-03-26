@@ -29,7 +29,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://109.176.19.22:8080',
+        target: 'https://api.geeknews.tech',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
